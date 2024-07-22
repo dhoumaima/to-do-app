@@ -19,6 +19,16 @@ function App() {
     setTodos (updateToDoArr);
     localStorage.setItem('todolist',JSON.stringify(updateToDoArr))
   };
+
+  const handleDeleteTodo =(index) =>
+  {
+    let reducedTodo = [...allTodos];
+    reducedTodo.splice(index);
+
+
+    localStorage.setItem('todolist',JSON.stringify(reducedTodo));
+    setTodos(reducedTodo);
+  }
    
 
   useEffect(()=>
@@ -74,7 +84,7 @@ function App() {
                 <p>{item.description}</p>
               </div>
               <div>
-                <MdDelete  className='icon' title='Delete?'/>
+                <MdDelete  className='icon' onClick={()=> handleDeleteTodo(index)} title='Delete?'/>
                 <BsCheckLg className='check-icon' title='Complete?'/>
               </div>
             </div>
