@@ -10,6 +10,10 @@ function App() {
 
 
   const handleAssTodo = ()=>{
+    if (!newTitle.trim()) {
+      alert("Title can not be empty.");
+      return;
+    }
     let newTodoItem = {
       title:newTitle,
       description:newDescription,
@@ -17,18 +21,21 @@ function App() {
     let updateToDoArr=[...allTodos];
     updateToDoArr.push(newTodoItem);
     setTodos (updateToDoArr);
-    localStorage.setItem('todolist',JSON.stringify(updateToDoArr))
+    localStorage.setItem('todolist',JSON.stringify(updateToDoArr));
+    // Clear the text areas by resetting the state
+    setNewTitle('');
+    setNewDescription('');
   };
 
   const handleDeleteTodo =(index) =>
   {
     let reducedTodo = [...allTodos];
-    reducedTodo.splice(index);
+    reducedTodo.splice(index,1);
 
 
     localStorage.setItem('todolist',JSON.stringify(reducedTodo));
-    setTodos(reducedTodo);
-  }
+    setTodos(reducedTodo)
+  };
    
 
   useEffect(()=>
